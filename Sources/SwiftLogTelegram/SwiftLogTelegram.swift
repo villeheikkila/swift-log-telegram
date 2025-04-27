@@ -231,23 +231,10 @@ extension Logger.MetadataValue {
 }
 
 private func escapeMarkdownV2(_ text: String) -> String {
-    text
-        .replacingOccurrences(of: "_", with: "\\_")
-        .replacingOccurrences(of: "*", with: "\\*")
-        .replacingOccurrences(of: "[", with: "\\[")
-        .replacingOccurrences(of: "]", with: "\\]")
-        .replacingOccurrences(of: "(", with: "\\(")
-        .replacingOccurrences(of: ")", with: "\\)")
-        .replacingOccurrences(of: "~", with: "\\~")
-        .replacingOccurrences(of: "`", with: "\\`")
-        .replacingOccurrences(of: ">", with: "\\>")
-        .replacingOccurrences(of: "#", with: "\\#")
-        .replacingOccurrences(of: "+", with: "\\+")
-        .replacingOccurrences(of: "-", with: "\\-")
-        .replacingOccurrences(of: "=", with: "\\=")
-        .replacingOccurrences(of: "|", with: "\\|")
-        .replacingOccurrences(of: "{", with: "\\{")
-        .replacingOccurrences(of: "}", with: "\\}")
-        .replacingOccurrences(of: ".", with: "\\.")
-        .replacingOccurrences(of: "!", with: "\\!")
+    let specialChars = ["_", "*", "[", "]", "(", ")", "~", "`", ">", "#", "+", "-", "=", "|", "{", "}", ".", "!"]
+    var result = text
+    for char in specialChars {
+        result = result.replacingOccurrences(of: char, with: "\\" + char)
+    }
+    return result
 }
